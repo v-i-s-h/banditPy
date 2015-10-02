@@ -2,7 +2,7 @@
 # Module      : markovArm
 # Description : Implements a markov arm - both rested and restless case
 # Author      : Vishnu Raj
-# Email       : get.vichu@gmail.com
+# Email       : get_vichu@yahoo.com
 
 # Changelogs
 

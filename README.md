@@ -7,7 +7,7 @@ Python library for solving bandit problems.
  * Markovian Arm
 
 #### Supported Algorithms
- * epsilon-Greedy
+ * epsilon Greedy
 
 #### Todo
 

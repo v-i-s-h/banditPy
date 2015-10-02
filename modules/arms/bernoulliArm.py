@@ -2,7 +2,7 @@
 # Module      : bernoulliArm
 # Description : Implements a Bernoulli arm for bandit
 # Author      : Vishnu Raj
-# Email       : get.vichu@gmail.com
+# Email       : get_vichu@yahoo.com
 
 # Changelogs
 
@@ -30,7 +30,8 @@ class bernoulliArm:
     """ Function to pull arm - returns either reward1 or reward2
     """
     def pull( self ):
-        if( random.random() > self.p ):
+        if( random.random() <= self.p ):
+            
             return self.reward1
         else:
             return self.reward2

@@ -2,7 +2,7 @@
 # Module      : normalArm
 # Description : Implements a Normal distribution arm
 # Author      : Vishnu Raj
-# Email       : get.vichu@gmail.com
+# Email       : get_vichu@yahoo.com
 
 # Changelogs
 
