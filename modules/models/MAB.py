@@ -28,17 +28,23 @@ class MAB( object ):
 
         #Pull arm with given Index
         for i in range(0,len(armsToPull)):
-            thisArmReward = self.arms[armstoPull[i]].pull()
+            thisArmReward = self.arms[armsToPull[i]].pull()
             thisRoundReward += [ thisArmReward ]
 
         # Tick through other arms
-        for i in range(0,len(arms):
-            if i not in armstoPull:
+        for i in range(0,len(self.arms)):
+            if i not in armsToPull:
                 self.arms[i].tick()
+
+        # Return Pull Rewards
+        return thisRoundReward
     """----------------------------------------------------------------------"""
     """ Tick : Tick through each arm once
+        Retruns : None
     """
     def tick( self ):
-        for i in range(0,len(arms)):
+        for i in range(0,len(self.arms)):
             self.arms[i].tick()
+
+        return None
     """----------------------------------------------------------------------"""
