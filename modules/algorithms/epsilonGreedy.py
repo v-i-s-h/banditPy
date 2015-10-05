@@ -69,6 +69,7 @@ class epsilonGreedy:
         # Check whether we have right type for armIndices
         if( type(armIndices) == int ):
             armIndices  = [ armIndices ]
+        if( ~isinstance(rewards,list) ):
             rewards     = [ rewards ]
         elif( type(armIndices) == list ):
             # Check whether rewards is also list of same length
@@ -91,6 +92,13 @@ class epsilonGreedy:
                                     + 1.00/self.pullCount[arm] \
                                         * (rewards[armIndices.index(arm)]-self.armValue[arm])
             i += 1
+    """----------------------------------------------------------------------"""
+    """ getStats() : get inner statistics of algorithm
+            Return : depends on algorithm,
+                     armPullCount, armIndices
+    """
+    def getStats( self ):
+        return self.pullCount, self.armValue
     """----------------------------------------------------------------------"""
 
 

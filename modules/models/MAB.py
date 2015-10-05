@@ -37,7 +37,10 @@ class MAB( object ):
                 self.arms[i].tick()
 
         # Return Pull Rewards
-        return thisRoundReward
+        if len(thisRoundReward) == 1:
+            return thisRoundReward[0]
+        else:
+            return thisRoundReward
     """----------------------------------------------------------------------"""
     """ Tick : Tick through each arm once
         Retruns : None

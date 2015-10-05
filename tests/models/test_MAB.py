@@ -14,9 +14,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../modules")))
 
 # Import modules
-from arms import bernoulliArm
-from arms import normalArm
-from arms import markovArm
+from arms import bernoulliArm, normalArm
 from models import MAB
 
 # create some arms
