@@ -67,9 +67,9 @@ class epsilonGreedy:
     """
     def updateRewards( self, armIndices, rewards ):
         # Check whether we have right type for armIndices
-        if( type(armIndices) == int ):
+        if( not isinstance(armIndices,list) ):
             armIndices  = [ armIndices ]
-        if( ~isinstance(rewards,list) ):
+        if( not isinstance(rewards,list) ):
             rewards     = [ rewards ]
         elif( type(armIndices) == list ):
             # Check whether rewards is also list of same length
@@ -85,13 +85,11 @@ class epsilonGreedy:
             return None
 
         # incremental update
-        i = 0
         for arm in armIndices:
             self.pullCount[arm]  += 1
             self.armValue[arm]   = self.armValue[arm] \
                                     + 1.00/self.pullCount[arm] \
                                         * (rewards[armIndices.index(arm)]-self.armValue[arm])
-            i += 1
     """----------------------------------------------------------------------"""
     """ getStats() : get inner statistics of algorithm
             Return : depends on algorithm,
@@ -104,20 +102,22 @@ class epsilonGreedy:
 
 # tetst code
 if __name__ == '__main__':
-    algo_epsG = epsilonGreedy( 0.10, 5 )
+    algo_epsG = epsilonGreedy( 0.30, 5 )
 
     rewards = [ 4.3, 6.7, 3.5, 0.3, 1.7 ]
 
-    for i in range( 500 ):
+    for i in range( 10 ):
         armIndices = algo_epsG.getArmsToPull()
         # print "Arms to Pull : ", armIndices, "    reward = ", rewards[armIndices]
         algo_epsG.updateRewards( armIndices, rewards[armIndices] )
 
+    print algo_epsG.getStats()
     algo_epsG.reset()
 
-    for i in range(500):
+    for i in range(10):
         armIndices = algo_epsG.getArmsToPull( 3 )
         # print "armsIndices : ", armIndices
         algo_epsG.updateRewards( armIndices, [ rewards[i] for i in armIndices ] )
 
+    print algo_epsG.getStats()
     algo_epsG.reset()
