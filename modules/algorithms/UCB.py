@@ -16,7 +16,7 @@ MODULE_NAME = "UCB"
 # Description : Implementation of UCB1 based on Fig.1 from
 #                   Auer, P., Cesa-bianchi, N., & Fischer, P. (2002).
 #                   Finite time analysis of the multiarmed bandit problem.
-#                   Machine Learning, 47, 235–256.
+#                   Machine Learning, 47, 235-256.
 ################################################################################
 class UCB1( object ):
         """----------------------------------------------------------------------"""

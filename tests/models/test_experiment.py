@@ -16,28 +16,76 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../m
 # Import modules
 from arms import bernoulliArm, normalArm
 from algorithms import epsilonGreedy
+from algorithms import UCB
 from models import MAB
 from models import experiment
 
+# Plot tools
+import matplotlib.pyplot as plt
+
 # Create some arms
-arm1 = bernoulliArm.bernoulliArm( 0.70, reward1 = 5.0, reward2 = 0.0 )
-arm2 = bernoulliArm.bernoulliArm( 0.35, reward1 = 3.0 )
-arm3 = bernoulliArm.bernoulliArm( 0.40, reward1 = 3.0 )
-arm4 = bernoulliArm.bernoulliArm( 0.90, reward1 = 1.5 )
-armModels = [ arm1, arm2, arm3, arm4 ]
+# arm1 = bernoulliArm.bernoulliArm( 0.70, reward1 = 5.0, reward2 = -4.0 )
+# arm2 = bernoulliArm.bernoulliArm( 0.35, reward1 = 3.0 )
+# arm3 = bernoulliArm.bernoulliArm( 0.40, reward1 = 3.0 )
+# arm4 = bernoulliArm.bernoulliArm( 0.90, reward1 = 1.5 )
+# armModels = [ arm1, arm2, arm3, arm4 ]
+
+armModels = [
+                normalArm.normalArm( 3.0 ),
+                normalArm.normalArm( 4.0, 1.0 ),
+                normalArm.normalArm( 5.0, 1.0 )
+            ]
 
 bandit = MAB.MAB( armModels )
 
-algo = epsilonGreedy.epsilonGreedy( 0.25, len(armModels) )
+algo0 = epsilonGreedy.epsilonGreedy( 0.25, len(armModels) )
+algo1 = UCB.UCB1( len(armModels) )
 
-exp = experiment.experiment( bandit, algo )
+exp0 = experiment.experiment( bandit, algo0 )
+exp1 = experiment.experiment( bandit, algo1 )
 
 # run expriment
-exp.run( 1000 )
-# indices, rewards = exp.run()
-# print "Indices : ", indices
-# print "Rewards : ", rewards
+selArmIndex0, obtainedRewards0 = exp0.run( 1000 )
+selArmIndex1, obtainedRewards1 = exp1.run( 1000 )
 
 # Get Status of experiment
-stats = exp.getStats()
-print "Stats : ", stats
+stats0 = exp0.getStats()
+print "Stats0 : "
+print "       Pull Count : ", stats0[0]
+print "       Arm Value  : ", stats0[1]
+stats1 = exp1.getStats()
+print "Stats1 : "
+print "       Pull Count : ", stats1[0]
+print "       Arm Values : ", stats1[1]
+print "       Avg. Reward: ", stats1[2]
+
+# calculate cummulative rewards
+cumRewards0 = [ sum(obtainedRewards0[:i+1]) for i in range(len(obtainedRewards0)) ]
+cumRewards1 = [ sum(obtainedRewards1[:i+1]) for i in range(len(obtainedRewards1)) ]
+# calculate average rewards till that step
+avgRewards0 = [ cumRewards0[i]/float(i+1) for i in range(len(cumRewards0)) ]
+avgRewards1 = [ cumRewards1[i]/float(i+1) for i in range(len(cumRewards1)) ]
+
+# Plot results
+# plt.figure( 1 )
+# plt.plot( cumRewards )
+# plt.ylabel( 'Cummulative Rewards' )
+# plt.xlabel( 'Steps')
+# plt.title( 'Cummulative Reward' )
+# plt.show()
+
+plt.figure( 1 )
+plt.plot( range(1,len(cumRewards0)+1), avgRewards0, 'b-', label = "epsilon-Greedy" )
+plt.plot( range(1,len(cumRewards1)+1), avgRewards1, 'r-', label = "UCB1" )
+plt.ylabel( 'Average Reward' )
+plt.xlabel( 'Steps' )
+plt.title( 'Average Reward' )
+plt.legend()
+plt.show()
+
+# plt.figure( 3 )
+# plt.plot( list(range(1,len(selArmIndex)+1)), selArmIndex, 'ro' )
+# plt.xlabel( 'Steps' )
+# plt.ylabel( 'Selected Arm' )
+# plt.title( 'Selected Arm' )
+# plt.show()

@@ -41,6 +41,9 @@ class experiment( object ):
             self.selectedIndices += [ armsToPull ]
             self.obtainedRewards += [ thisReward ]
 
+            # update internal counter
+            self.tickCounter += 1
+
         return self.selectedIndices, self.obtainedRewards
     """----------------------------------------------------------------------"""
     """ getStats() : Passes internal state of algorithm
