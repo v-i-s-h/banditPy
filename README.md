@@ -8,6 +8,7 @@ Python library for solving bandit problems.
 
 #### Supported Algorithms
  * epsilon Greedy
+ * UCB1
 
 #### Todo
 
