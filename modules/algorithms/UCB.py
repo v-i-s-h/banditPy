@@ -91,7 +91,9 @@ class UCB1( object ):
                          armPullCount, armIndices
         """
         def getStats( self ):
-            return self.pullCount, self.armValue, self.armAvgReward
+            return { 'pullCount' : self.pullCount,
+                     'armValue'  : self.armValue,
+                     'AvgReward' : self.armAvgReward }
         """----------------------------------------------------------------------"""
 
 def test_UCB1():

@@ -96,7 +96,8 @@ class epsilonGreedy:
                      armPullCount, armIndices
     """
     def getStats( self ):
-        return self.pullCount, self.armValue
+        return { 'pullCount'    : self.pullCount,
+                 'armValue'     : self.armValue     }
     """----------------------------------------------------------------------"""
 
 

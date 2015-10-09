@@ -51,13 +51,12 @@ selArmIndex1, obtainedRewards1 = exp1.run( 1000 )
 # Get Status of experiment
 stats0 = exp0.getStats()
 print "Stats0 : "
-print "       Pull Count : ", stats0[0]
-print "       Arm Value  : ", stats0[1]
+for stat in stats0:
+    print stat, " : ", stats0[stat]
 stats1 = exp1.getStats()
 print "Stats1 : "
-print "       Pull Count : ", stats1[0]
-print "       Arm Values : ", stats1[1]
-print "       Avg. Reward: ", stats1[2]
+for stat in stats1:
+    print stat, " : ", stats1[stat]
 
 # calculate cummulative rewards
 cumRewards0 = [ sum(obtainedRewards0[:i+1]) for i in range(len(obtainedRewards0)) ]
