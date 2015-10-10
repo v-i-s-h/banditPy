@@ -22,7 +22,7 @@ class algoName( object ):
         """ Initialization : set the parameters for algorithm
                 <param : description>
         """
-        def __init__( self, params ):
+        def __init__( self, noOfArms, otherParams ):
             # Do Initialization here
 
             # Optional Reset init the internal values
